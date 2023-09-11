@@ -21,7 +21,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # My apps
-    "recipes_prj.accounts"
+    "recipes_prj.accounts",
+    "recipes_prj.recipes",
 ]
 
 MIDDLEWARE = [
