@@ -8,7 +8,6 @@ import recipes_prj.accounts.managers
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [

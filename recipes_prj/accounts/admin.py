@@ -2,7 +2,10 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
+from recipes_prj.core.account_helpers.get_profile_helper import get_profile_model
+
 User = get_user_model()
+Cook = get_profile_model()
 
 
 @admin.register(User)
@@ -40,3 +43,6 @@ class AppUserAdmin(auth_admin.UserAdmin):
     )
     ordering = ("-is_superuser",)
     readonly_fields = ("date_joined",)
+
+
+admin.site.register(Cook)
