@@ -15,7 +15,7 @@ from recipes_prj.recipes.models import Recipe, Ingredient
 
 class HomePageView(ListView):
     model = Recipe
-    template_name = ""
+    template_name = "recipes/home.html"
 
 
 class RecipesCreate(LoginRequiredMixin, CreateView):
