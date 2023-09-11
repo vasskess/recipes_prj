@@ -22,7 +22,8 @@
                                                    class="form-control form-control-lg" placeholder="Your email">
                                             {% for error in form.email.errors %}
                                                 <div>
-                                                    <small class="text-danger m-0">{{ error }}</small>
+                                                    <p class="text-danger m-0"
+                                                       style="text-align: center">{{ error }}</p>
                                                 </div>
                                             {% endfor %}
                                         </div>
@@ -41,7 +42,8 @@
                                                    placeholder="Repeat your password">
                                             {% for error in form.password2.errors %}
                                                 <div>
-                                                    <small class="text-danger m-0">{{ error }}</small>
+                                                    <p class="text-danger m-0"
+                                                       style="text-align: center">{{ error }}</p>
                                                 </div>
                                             {% endfor %}
                                         </div>
@@ -67,6 +69,50 @@
         </section>
 
     {% else %}
-    {# TODO - login   #}
+        <section class="vh-100 bg-image"
+                 style="background-image: url('{% static "images/food_pattern.jpg" %}');">
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 15px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Login to your account</h2>
+                                    <form method="POST" action="{% url "login" %}">
+                                        {% csrf_token %}
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="formInput#text"></label>
+                                            <input type="text" id="formInput#text" name="username"
+                                                   class="form-control form-control-lg" placeholder="Your email">
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="formInput#passowrd"></label>
+                                            <input type="password" id="formInput#passowrd"
+                                                   name="password"
+                                                   class="form-control form-control-lg" placeholder="Your password"/>
+                                            {% for error in form.non_field_errors %}
+                                                <div>
+                                                    <p class="text-danger m-0"
+                                                       style="text-align: center;">{{ error }}</p>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit"
+                                                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                                                LogIn
+                                            </button>
+                                        </div>
+                                        <p class="text-center text-muted mt-5 mb-0">Dont have an account? <a
+                                                href="{% url "register" %}"
+                                                class="fw-bold text-body"><u>Register here</u></a></p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     {% endif %}
 {% endblock content %}
