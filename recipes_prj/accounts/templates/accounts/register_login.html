@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% if page == "register" %}
+        <section class="vh-100 bg-image"
+                 style="background-image: url('{% static "images/food_pattern.jpg" %}');">
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 15px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+                                    <form method="POST" action="{% url "register" %}">
+                                        {% csrf_token %}
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="{{ form.email.id }}"></label>
+                                            <input type="text" id="{{ form.email.id }}" name="{{ form.email.name }}"
+                                                   class="form-control form-control-lg" placeholder="Your email">
+                                            {% for error in form.email.errors %}
+                                                <div>
+                                                    <small class="text-danger m-0">{{ error }}</small>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="{{ form.password1.id }}"></label>
+                                            <input type="password" id="{{ form.password1.id }}"
+                                                   name="{{ form.password1.name }}"
+                                                   class="form-control form-control-lg" placeholder="Your password"/>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="{{ form.password2.id }}"></label>
+                                            <input type="password" id="{{ form.password2.id }}"
+                                                   name="{{ form.password2.name }}"
+                                                   class="form-control form-control-lg"
+                                                   placeholder="Repeat your password">
+                                            {% for error in form.password2.errors %}
+                                                <div>
+                                                    <small class="text-danger m-0">{{ error }}</small>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit"
+                                                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                                                Register
+                                            </button>
+                                        </div>
+
+                                        <p class="text-center text-muted mt-5 mb-0">Have already an account? <a
+                                                href="{% url "login" %}"
+                                                class="fw-bold text-body"><u>Login here</u></a></p>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% else %}
+    {# TODO - login   #}
+    {% endif %}
+{% endblock content %}

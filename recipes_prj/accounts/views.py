@@ -16,7 +16,7 @@ Cook = get_profile_model()
 
 
 class AppUserCreate(CreateView):
-    template_name = ""
+    template_name = "accounts/register_login.html"
     form_class = AppUserCreationForm
 
     def form_valid(self, form):
@@ -31,7 +31,7 @@ class AppUserCreate(CreateView):
 
 
 class AppUserLogin(LoginView):
-    template_name = ""
+    template_name = "accounts/register_login.html"
     form_class = AppUserLoginForm
 
     def get_context_data(self, **kwargs):
