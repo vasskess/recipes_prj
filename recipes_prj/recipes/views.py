@@ -8,6 +8,7 @@ from django.views.generic import (
     DeleteView,
 )
 
+from recipes_prj.core.recipes_helpers.recipe_owner_mixin import RecipeOwnerMixin
 from recipes_prj.recipes.forms import RecipeCreateForm, RecipeEditForm
 from recipes_prj.recipes.models import Recipe, Ingredient
 
@@ -48,7 +49,7 @@ class RecipeDetails(LoginRequiredMixin, DetailView):
         return context
 
 
-class RecipeEdit(LoginRequiredMixin, UpdateView):
+class RecipeEdit(LoginRequiredMixin, RecipeOwnerMixin, UpdateView):
     model = Recipe
     form_class = RecipeEditForm
     template_name = ""
@@ -69,7 +70,7 @@ class RecipeEdit(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class RecipeDelete(LoginRequiredMixin, DeleteView):
+class RecipeDelete(LoginRequiredMixin, RecipeOwnerMixin, DeleteView):
     model = Recipe
 
     def get_success_url(self):

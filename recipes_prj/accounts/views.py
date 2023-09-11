@@ -1,5 +1,5 @@
 from django.contrib.auth import login, get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
@@ -48,14 +48,22 @@ class AppUserDetails(DetailView):
     template_name = ""
 
 
-class AppUserEdit(LoginRequiredMixin, UpdateView):
+class AppUserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Cook
     form_class = AppUserEditForm
     template_name = ""
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
 
-class AppUserDelete(LoginRequiredMixin, DeleteView):
+
+class AppUserDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = User
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.email == self.request.user
 
     def get_success_url(self):
         return reverse_lazy("login")
