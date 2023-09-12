@@ -1,6 +1,7 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
@@ -45,7 +46,8 @@ class AppUserLogin(LoginView):
 
 class AppUserDetails(DetailView):
     model = User
-    template_name = ""
+    template_name = "accounts/profile_details.html"
+    context_object_name = "cook"
 
 
 class AppUserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -55,15 +57,16 @@ class AppUserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         obj = self.get_object()
-        return obj.user == self.request.user
+        return obj.pk == self.request.user.pk
 
 
 class AppUserDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = User
+    template_name = "accounts/profile_delete.html"
 
     def test_func(self):
         obj = self.get_object()
-        return obj.email == self.request.user
+        return obj.pk == self.request.user.pk
 
     def get_success_url(self):
         return reverse_lazy("login")
