@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load label_fixer_filter %}
+
+{% block content %}
+    <section class="vh-100 bg-image"
+             style="background-image: url('{% static "images/register.png" %}');">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px; margin-top: 1rem">
+                            <div class="card-body p-5">
+                                <h2 class="text-uppercase text-center mb-5">Create a recipe</h2>
+                                <form method="post" action="{% url "recipes-create" %}"
+                                      enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="form-group row">
+                                           <label class="col-form-label"
+                                                   for="{{ field.id }}">{{ field.name|fix_label }}</label>
+                                            {{ field }}
+                                        </div>
+                                        {% for error in field.errors %}
+                                            <p class="text-danger m-0" style="text-align: center">
+                                                {{ error }}
+                                            </p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    <br>
+                                    <div class="d-flex justify-content-center">
+                                        <input class="btn btn-success" type="submit" value="Create Recipe"/>
+                                    </div>
+                                    <br>
+                                </form>
+                                <div class="d-flex justify-content-center">
+                                    <a type="button" class="btn btn-secondary"
+                                       href="{% url "recipes-list" %}">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

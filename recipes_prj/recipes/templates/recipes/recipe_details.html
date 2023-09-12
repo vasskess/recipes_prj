@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <form class="row g-3">
+        <section class="vh-100 bg-image"
+                 style="background-image: url('{% static "images/details.png" %}');">
+            <div class="container py-5 h-100">
+                <div class="col col-lg-6 mb-4 mb-lg-0">
+                    <div class="card mb-3" style="border-radius: .5rem;">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                                <div class="card-body p-4">
+                                    <h6>Recipe Information</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Title</h6>
+                                            <p class="text-muted">{{ recipe.title }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        {% if recipe.photo %}
+                                        <h6>Photo</h6>
+                                        <img src="{{ recipe.photo.url }}" alt="recipe-img"/>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h6>Description</h6>
+                                        <p class="text-muted">{{ recipe.description }}</p>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h6>Time for prepare</h6>
+                                        <p class="text-muted">{{ recipe.time_for_prepare }}</p>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h6>Likely Cost</h6>
+                                        <p class="text-muted">{{ recipe.likely_cost }}</p>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h6>Ingredients</h6>
+                                        {% for ingredient in recipe.ingredients.all %}
+                                            {{ ingredient }}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock content %}

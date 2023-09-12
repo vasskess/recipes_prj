@@ -21,7 +21,7 @@ class HomePageView(ListView):
 class RecipesCreate(LoginRequiredMixin, CreateView):
     model = Recipe
     form_class = RecipeCreateForm
-    template_name = ""
+    template_name = "recipes/recipes_create.html"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -40,7 +40,7 @@ class RecipesCreate(LoginRequiredMixin, CreateView):
 
 class RecipeDetails(LoginRequiredMixin, DetailView):
     model = Recipe
-    template_name = ""
+    template_name = "recipes/recipe_details.html"
     context_object_name = "recipe"
 
     def get_context_data(self, **kwargs):

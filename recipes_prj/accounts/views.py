@@ -53,11 +53,14 @@ class AppUserDetails(DetailView):
 class AppUserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Cook
     form_class = AppUserEditForm
-    template_name = ""
+    template_name = "accounts/profile_update.html"
 
     def test_func(self):
         obj = self.get_object()
         return obj.pk == self.request.user.pk
+
+    def get_success_url(self):
+        return reverse_lazy("profile-details", kwargs={"pk": self.request.user.pk})
 
 
 class AppUserDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
