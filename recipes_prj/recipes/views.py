@@ -52,7 +52,7 @@ class RecipeDetails(LoginRequiredMixin, DetailView):
 class RecipeEdit(LoginRequiredMixin, RecipeOwnerMixin, UpdateView):
     model = Recipe
     form_class = RecipeEditForm
-    template_name = ""
+    template_name = "recipes/recipe_update.html"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -72,6 +72,7 @@ class RecipeEdit(LoginRequiredMixin, RecipeOwnerMixin, UpdateView):
 
 class RecipeDelete(LoginRequiredMixin, RecipeOwnerMixin, DeleteView):
     model = Recipe
+    template_name = "recipes/recipe_delete.html"
 
     def get_success_url(self):
         return reverse_lazy("recipes-list")

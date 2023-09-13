@@ -13,17 +13,17 @@
                                 <h2 class="text-uppercase text-center mb-5">WARNING !</h2>
                                 <div>
                                     <form class="delete-form" method="post"
-                                          action="{% url "profile-delete" user.pk %}"
+                                          action="{% url "recipe-delete" recipe.pk %}"
                                           enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <h3>Dear, <span class="badge bg-warning text-dark">{{ request.user }}</span> are
-                                            you sure you want to delete your profile
-                                            ?</h3>
-                                        <input class="btn btn-danger" type="submit" value="Delete Profile"/>
+                                        <h3>You are about to delete Recipe: <span
+                                                class="badge bg-warning text-dark">{{ recipe.title }}</span> are
+                                            you sure ?</h3>
+                                        <input class="btn btn-danger" type="submit" value="Delete Recipe"/>
                                     </form>
                                     <br>
                                     <div><a class="btn btn-success"
-                                            href="{% url "profile-details" user.pk %}">Cancel</a>
+                                            href="{% url "recipe-details" recipe.pk %}">Cancel</a>
                                     </div>
                                 </div>
                             </div>

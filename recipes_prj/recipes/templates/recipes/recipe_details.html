@@ -20,9 +20,9 @@
                                         </div>
                                     </div>
                                     <div class="col-6 mb-3">
+                                        <h6>Recipe Photo</h6>
                                         {% if recipe.photo %}
-                                        <h6>Photo</h6>
-                                        <img src="{{ recipe.photo.url }}" alt="recipe-img"/>
+                                        <img src="{{ recipe.photo.url }}" class="w-100" style="border-radius: 1rem" alt="recipe-img"/>
                                         {% endif %}
                                     </div>
                                     <div class="col-6 mb-3">
@@ -42,6 +42,16 @@
                                         {% for ingredient in recipe.ingredients.all %}
                                             {{ ingredient }}
                                         {% endfor %}
+                                    </div>
+                                <div class="col-6 mb-3">
+                                        <a href="{% url "recipe-update" recipe.pk %}">
+                                            <button type="button" class="btn btn-info">Update</button>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <a href="{% url "recipe-delete" recipe.pk %}">
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
